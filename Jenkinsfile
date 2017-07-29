@@ -5,7 +5,7 @@ pipeline {
     stage('build') {
       steps {
         sh 'ant -f build.xml -v'
-        sh 'cd dist'
+        sh 'cd $JOB_NAME/dist'
         sh 'java -jar rectangle.jar 4 5'
       }
     }
