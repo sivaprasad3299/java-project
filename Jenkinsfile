@@ -49,14 +49,5 @@ pipeline {
         sh "java -jar rectangle_${env.BUILD_NUMBER}.jar 7 8"
       }
     }
-    stage('running on alpine'){
-      agent {
-        docker 'openjdk:alpine'
-      }
-      steps {
-        sh "wget http://siva4devops1.mylabserver.com/rectangles/all/rectangle_${env.BUILD_NUMBER}.jar"
-        sh "java -jar rectangle_${env.BUILD_NUMBER}.jar 10 20"
-      }
-    }
   }
 }
