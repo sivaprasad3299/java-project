@@ -40,5 +40,14 @@ pipeline {
         sh "java -jar rectangle_${env.BUILD_NUMBER}.jar 3 4"
       }
     }
+    stage('running on docker') {
+      agent {
+        docker 'openjdk:8u121-jre'
+      }
+      steps {
+        sh "wget http://siva4devops1.mylabserver.com/rectangles/all/rectangle_${env.BUILD_NUMBER}.jar"
+        sh "java -jar rectangle_${env.BUILD_NUMBER}.jar 7 8"
+      }
+    }
   }
 }
