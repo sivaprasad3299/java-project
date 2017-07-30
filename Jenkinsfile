@@ -2,9 +2,15 @@ pipeline {
   agent any
 
   options {
-    buildDiscarder(logRotator(numToKeepStr: '2', artifactNumToKeepStr: '1'))  
+    buildDiscarder(logRotator(numToKeepStr: '2', artifactNumToKeepStr: '1'))
   }
   stages {
+    stage('unit test') {
+      stpes{
+        sh 'ant -f text.xml -v'
+        junit 'reports/result.xml'
+      }
+    }
     stage('build') {
       steps {
         sh 'ant -f build.xml -v'
