@@ -61,5 +61,24 @@ pipeline {
         sh "cp /var/www/html/rectangles/all/rectangle_${env.BUILD_NUMBER}.jar /var/www/html/rectangles/green/rectangle_${env.BUILD_NUMBER}.jar"
       }
     }
+    stage('Promote to Development Branch to Master'){
+      agent {
+        label 'apache'
+      }
+      when {
+        branch 'development'
+      }
+      steps {
+        sh 'git stash'
+        echo 'checking out development branch'
+        sh 'git checkout development'
+        echo 'checking out master branch'
+        sh 'git chckout master'
+        echo 'merging development into master branch'
+        sh 'git merge development'
+        echo 'pushing to origin master'
+        sh 'git push origin master'
+      }
+    }
   }
 }
