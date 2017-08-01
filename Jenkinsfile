@@ -4,6 +4,10 @@ pipeline {
     MAJOR_VERSION = 1
   }
   stages {
+    stage ('Say Hello') {
+      agent any
+      sayHello 'Awesome Student!'
+    }
     stage('unit test') {
       agent {
         label 'apache'
