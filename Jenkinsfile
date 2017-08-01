@@ -7,7 +7,17 @@ pipeline {
     stage ('Say Hello') {
       agent any
       steps {
-        sayHello 'Awesome Student!'  
+        sayHello 'Awesome Student!'
+      }
+    }
+    stage('Git Information') {
+      agent any
+      steps {
+        echo "My Branch Name: ${env.BRANCH_NAME}"
+        script {
+          def mylib = new mylibrary.git.gitStuff();
+          echo "My Commi: ${mylib.gitCommit("${env.WORKSPACE}/.git")}"
+        }
       }
     }
     stage('unit test') {
