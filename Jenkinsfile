@@ -45,7 +45,7 @@ pipeline {
         sh "java -jar rectangle_${env.MAJOR_VERSION}.${env.BUILD_NUMBER}.jar 3 4"
       }
     }
-    stage('testing on docker') {
+    stage('testing on docker images') {
       agent {
         docker 'openjdk:8u121-jre'
       }
@@ -77,9 +77,10 @@ pipeline {
         sh 'git stash'
         echo "Checking Out Development Branch"
         sh 'git checkout development'
-        echo 'Checking Out Master Branch'
         sh 'git pull origin'
+        echo 'Checking Out Master Branch'
         sh 'git checkout master'
+        sh 'git pull origin'
         echo 'Merging Development into Master Branch'
         sh 'git merge development'
         echo 'Pushing to Origin Master'
