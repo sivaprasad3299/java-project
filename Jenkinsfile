@@ -10,11 +10,14 @@ pipeline {
         sayHello 'Awesome Student!'
       }
     }
-    stage('Git Information'){
-      echo "My Branch Name: ${env.BRANCH_NAME}"
-      script {
-        def mylib = new mylibrary.git.getStuff();
-        echo "My Commi: ${mylib.gitCommit("${env.WORKSPACE}/.git")}"
+    stage('Git Information') {
+      agent any
+      steps {
+        echo "My Branch Name: ${env.BRANCH_NAME}"
+        script {
+          def mylib = new mylibrary.git.getStuff();
+          echo "My Commi: ${mylib.gitCommit("${env.WORKSPACE}/.git")}"
+        }
       }
     }
     stage('unit test') {
