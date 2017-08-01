@@ -104,11 +104,11 @@ pipeline {
   post {
     always {
       emailext (
-        subject: "${env.JOB_NAME} [${env.BUILD_NUMBER}] ${env.BUILD_STATUS}!",
-        body:"""<p>'${env.JOB_NAME} [${env.BUILD_NUMBER}]' ${env.BUILD_STATUS}!":</p>
+        subject: "${env.JOB_NAME} [${env.BUILD_NUMBER}] Failed!",
+        body:"""<p>'${env.JOB_NAME} [${env.BUILD_NUMBER}]' Failed!":</p>
         <p>Check console output at &QUOT;<a href='${env.BUILD_URL}'>${env.JOB_NAME} [${env.BUILD_NUMBER}]</a>&QUOT;</p>""",
         to:"siva4devops@gmail.com"
-        )
+      )
     }
   }
 }
