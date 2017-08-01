@@ -45,7 +45,7 @@ pipeline {
         sh "java -jar rectangle_${env.MAJOR_VERSION}.${env.BUILD_NUMBER}.jar 3 4"
       }
     }
-    stage('testing on docker') {
+    stage('testing on docker images') {
       agent {
         docker 'openjdk:8u121-jre'
       }
